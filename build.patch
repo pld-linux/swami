@@ -1,0 +1,40 @@
+--- swami-2.2.0/CMakeLists.txt~	2022-01-29 23:16:50.000000000 +0100
++++ swami-2.2.0/CMakeLists.txt	2022-01-29 23:19:16.388525959 +0100
+@@ -62,28 +62,6 @@
+ 
+ unset ( SWAMI_LIBS CACHE )
+ 
+-# Options for the GNU C compiler only
+-if ( CMAKE_COMPILER_IS_GNUCC )
+-  if ( NOT APPLE )
+-    set ( CMAKE_EXE_LINKER_FLAGS 
+-          "${CMAKE_EXE_LINKER_FLAGS} -Wl,--as-needed" )
+-    set ( CMAKE_SHARED_LINKER_FLAGS 
+-          "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined" )
+-  endif ( NOT APPLE )
+-  set ( GNUCC_WARNING_FLAGS "-Wall")
+-  set ( CMAKE_C_FLAGS_DEBUG "-g -DDEBUG ${GNUCC_WARNING_FLAGS}" )
+-  set ( CMAKE_C_FLAGS_RELEASE "-O2 -DNDEBUG ${GNUCC_WARNING_FLAGS}" )
+-  set ( CMAKE_C_FLAGS_RELWITHDEBINFO "-O2 -g -DNDEBUG ${GNUCC_WARNING_FLAGS}" )
+-endif ( CMAKE_COMPILER_IS_GNUCC )
+-
+-if ( enable-debug )  
+-    set ( CMAKE_BUILD_TYPE "Debug" CACHE STRING
+-          "Choose the build type, options: Debug Release RelWithDebInfo" FORCE )
+-else ( enable-debug )
+-    set ( CMAKE_BUILD_TYPE "Release" CACHE STRING
+-          "Choose the build type, options: Debug Release RelWithDebInfo" FORCE )
+-endif ( enable-debug )
+-
+ unset ( MINGW32 CACHE )
+ if ( WIN32 )
+   # MinGW compiler (a Windows GCC port)
+@@ -238,7 +238,7 @@
+ include ( InstallRequiredSystemLibraries )
+ set ( CPACK_GENERATOR STGZ;TGZ;TBZ2;ZIP )
+ set ( CPACK_PACKAGE_NAME ${PACKAGE} )
+-set ( CPACK_STRIP_FILES ON )
++set ( CPACK_STRIP_FILES OFF )
+ 
+ include ( CPack )
+ 

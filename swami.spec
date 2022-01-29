@@ -2,12 +2,13 @@ Summary:	Sampled Waveforms And Musical Instruments - SoundFont editor
 Summary(pl.UTF-8):	Sampled Waveforms And Musical Instruments - edytor fontów dźwiękowych
 Name:		swami
 Version:	2.2.0
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/Sound
 #Source0Download: https://github.com/swami/swami/releases
 Source0:	https://github.com/swami/swami/archive/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	d3d5ddffe5227e70e1bf4731b01c3b23
+Patch0:		build.patch
 URL:		http://www.swamiproject.org/
 BuildRequires:	cmake >= 2.6.3
 BuildRequires:	fftw3-single-devel >= 3.0
@@ -101,6 +102,7 @@ Pliki nagłówkowe biblioteki GUI SWAMI.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 install -d build
